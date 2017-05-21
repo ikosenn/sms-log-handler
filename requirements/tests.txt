@@ -1,0 +1,6 @@
+-e .
+
+flake8
+pytest
+tox
+pytest-cov
