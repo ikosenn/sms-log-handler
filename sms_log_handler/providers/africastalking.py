@@ -8,7 +8,7 @@ class AfricasTalkingProvider(SMSProviderBase):
     AfricasTalking provider
     """
 
-    def send(self, phone_numbers, message):
+    def send(self, phone_numbers: str, message: str) -> None:
         """
         Handles sending of the error message to the provider phone numbers
 

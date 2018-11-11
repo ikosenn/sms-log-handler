@@ -1,11 +1,12 @@
-import logging
 import datetime
+import logging
+from typing import Dict
 
 from .utils import import_from_string
 
 
 class SMSHandler(logging.Handler):
-    def __init__(self, provider_config):
+    def __init__(self, provider_config: Dict) -> None:
         """
         Initializes the SMSHandler
 
@@ -17,7 +18,7 @@ class SMSHandler(logging.Handler):
                                 provider_send_to: [<an array of phone numbers>]
                              }
         """
-        logging.Handler.__init__(self)
+        super().__init__(self)
         self.provider_class_str = provider_config.get(
             'provider_class',
             'sms_log_handler.providers.africastalking.AfricasTalkingProvider')
@@ -26,7 +27,7 @@ class SMSHandler(logging.Handler):
         self.secret = provider_config.get('provider_secret', '')
         self.phone_numbers = provider_config.get('provider_send_to', [])
 
-    def emit(self, record):
+    def emit(self, record) -> None:
         """
         Sends the message
         """
@@ -34,7 +35,7 @@ class SMSHandler(logging.Handler):
         sms_provider = self.provider_class(self.key, self.secret)
         sms_provider.send(self.phone_numbers, to_send)
 
-    def _construct_message(self, record):
+    def _construct_message(self, record) -> str:
         """
         Contruct and format the mesage to be sent.
 
