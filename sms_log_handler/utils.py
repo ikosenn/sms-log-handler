@@ -1,7 +1,7 @@
 from importlib import import_module
 
 
-def import_from_string(string_representation):
+def import_from_string(string_representation: str) -> str:
     """
     Import a class from string
     """
